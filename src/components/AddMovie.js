@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { MovieContext } from "../contexts/MovieContext";
-import { Grid, TextField } from "@mui/material";
+import { Button, Grid, TextField } from "@mui/material";
 
 const AddMovie = () => {
     const [movies, setMovies] = useContext(MovieContext);
@@ -34,15 +34,15 @@ const AddMovie = () => {
 
     return (
         <Grid
-            container 
+            container
             justifyContent="center"
         >
             <Grid item xs={4}>
                 <form>
                     <h3>Add a Movie</h3>
-                    <Grid 
-                        container 
-                        spacing={2} 
+                    <Grid
+                        container
+                        spacing={2}
                         justifyContent="center"
                     >
                         <Grid item>
@@ -51,6 +51,7 @@ const AddMovie = () => {
                                 id="input-name"
                                 label="Name"
                                 fullWidth
+                                onChange={handleNameChange}
                             />
                         </Grid>
                         <Grid item>
@@ -59,6 +60,7 @@ const AddMovie = () => {
                                 id="input-year"
                                 label="Year"
                                 fullWidth
+                                onChange={handleYearChange}
                             />
                         </Grid>
                         <Grid item>
@@ -67,6 +69,7 @@ const AddMovie = () => {
                                 id="input-rating"
                                 label="Rating"
                                 fullWidth
+                                onChange={handleRatingChange}
                             />
                         </Grid>
                         <Grid item>
@@ -75,7 +78,33 @@ const AddMovie = () => {
                                 id="input-genre"
                                 label="Genre"
                                 fullWidth
+                                onChange={handleGenreChange}
                             />
+                        </Grid>
+                        <Grid item xs={6.55}>
+                            <Grid 
+                                container
+                                justifyContent="space-between"
+                            >
+                                <Grid item>
+                                    <Button
+                                        variant="contained"
+                                        color="primary"
+                                        onClick={handleSubmit}
+                                    >
+                                        Submit
+                                    </Button>
+                                </Grid>
+                                <Grid item>
+                                    <Button
+                                        variant="contained"
+                                        color="secondary"
+                                        type="reset"
+                                    >
+                                        Clear
+                                    </Button>
+                                </Grid>
+                            </Grid>
                         </Grid>
                     </Grid>
                 </form>

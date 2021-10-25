@@ -40,6 +40,7 @@ const SearchMovies = () => {
                                     id="input-search"
                                     label="Search Movies"
                                     fullWidth
+                                    onChange={handleNameChange}
                                 />
                             </Grid>
                         </Grid>
