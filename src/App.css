@@ -1,5 +1,3 @@
-
-
 h1, h2, h3, h4, h5, h6 {
   text-align: center;
 }
@@ -7,4 +5,19 @@ h1, h2, h3, h4, h5, h6 {
 table.center {
   margin-left:auto; 
   margin-right:auto;
+}
+
+.table-header {
+  font-weight: bold;
+}
+
+.link {
+  text-decoration: none;
+  text-transform: uppercase;
+  color: white;
+  padding: 20px;
+}
+
+.link:hover {
+  color: #ffeb3b;
 }

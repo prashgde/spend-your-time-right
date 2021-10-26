@@ -1,20 +1,27 @@
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 import Movie from "./Movie";
 
-const Movies = ({movies, header}) => {
+const Movies = ({ movies, header }) => {
     return (
         <div>
             <h3>{header}</h3>
-            <table className='center'>
-                <tr>
-                    <th>Name</th>
-                    <th>Year</th>
-                    <th>Rating</th>
-                    <th>Genre</th>
-                </tr>
-                {movies.map(movie =>
-                    <Movie movie={movie}/>
-                )}
-            </table>
+            <TableContainer>
+                <Table>
+                    <TableHead>
+                        <TableRow>
+                            <TableCell><strong>Name</strong></TableCell>
+                            <TableCell><strong>Year</strong></TableCell>
+                            <TableCell><strong>Rating</strong></TableCell>
+                            <TableCell><strong>Genre</strong></TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {movies.map(movie =>
+                            <Movie movie={movie} />
+                        )}
+                    </TableBody>
+                </Table>
+            </TableContainer>
         </div>
     );
 }
