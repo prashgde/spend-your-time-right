@@ -2,6 +2,7 @@ import { Grid, TextField } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
 import { MovieContext } from "../contexts/MovieContext";
 import Movie from "./Movie";
+import Movies from "./Movies";
 
 const SearchMovies = () => {
     const [name, setName] = useState(null);
@@ -47,20 +48,7 @@ const SearchMovies = () => {
                     </form>
                 </Grid>
             </Grid>
-            <div>
-                <h4>Search Results</h4>
-                <table className='center'>
-                    <tr>
-                        <th>Name</th>
-                        <th>Year</th>
-                        <th>Rating</th>
-                        <th>Genre</th>
-                    </tr>
-                    {searchedMovies.map(movie =>
-                        <Movie movie={movie} />
-                    )}
-                </table>
-            </div>
+            <Movies movies={searchedMovies} header='Search Results' />
         </div>
     );
 }
