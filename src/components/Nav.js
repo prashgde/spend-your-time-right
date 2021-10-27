@@ -2,17 +2,15 @@ import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import About from "./About";
 import ContactUs from "./ContactUs";
 import LoginControl from "./LoginControl";
-import MovieList from "./MovieList";
 import AddMovie from "./AddMovie";
 import 'boxicons';
 import { useState } from "react";
-import SearchMovies from "./SearchMovies";
+import Movies from "./Movies";
 
 const Nav = () => {
     const [searchString, setSearchString] = useState('');
 
     const handleSearchStringChange = e => {
-        e.preventDefault();
         setSearchString(e.target.value);
     }
 
@@ -36,8 +34,7 @@ const Nav = () => {
                 <Route path='/login'><LoginControl /></Route>
                 <Route path='/'>
                     <AddMovie />
-                    <MovieList />
-                    <SearchMovies searchString={searchString}/>
+                    <Movies searchString={searchString}/>
                 </Route>
             </Switch>
         </Router>
