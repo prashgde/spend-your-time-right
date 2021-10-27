@@ -1,13 +1,11 @@
-import { TableCell, TableRow } from "@mui/material";
-
-const Movie = ({ movie }) => {
+const Movie = ({movie}) => {
     return (
-        <TableRow>
-            <TableCell>{movie.name}</TableCell>
-            <TableCell>{movie.year}</TableCell>
-            <TableCell>{movie.rating}</TableCell>
-            <TableCell>{movie.genre}</TableCell>
-        </TableRow>
+        <tr>
+            <td>{movie.name}</td>
+            <td>{movie.year}</td>
+            <td>{movie.rating}</td>
+            <td>{movie.genre}</td>
+        </tr>
     );
 }
 
