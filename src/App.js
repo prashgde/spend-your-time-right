@@ -1,15 +1,11 @@
 import './App.css';
-import AddMovie from './components/AddMovie';
-import MovieList from './components/MovieList';
-import SearchMovies from './components/SearchMovies';
+import Header from './components/Header';
 import { MovieProvider } from './contexts/MovieContext';
 
 function App() {
   return (
     <MovieProvider>
-      <AddMovie/>
-      <MovieList/>
-      <SearchMovies/>
+      <Header/>
     </MovieProvider>
   );
 }
