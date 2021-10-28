@@ -1,5 +1,10 @@
+:root {
+  --primary-blue: #04a6d8;
+  --primary-gray: #50555a;
+}
+
 * {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -9,6 +14,7 @@ h1, h2, h3, h4, h5, h6 {
 h1, h2, h3 {
   text-transform: uppercase;
   margin-top: 40px;
+  color: var(--primary-gray);
 }
 
 input {
@@ -28,13 +34,24 @@ input:focus {
   border-width: 1.5px;
 }
 
-table.center {
+table{
   margin-left:auto; 
   margin-right:auto;
+  border-collapse: collapse;
 }
 
-.table-header {
-  font-weight: bold;
+th, td {
+  border-color: var(--primary-blue);
+  border-width: 1px;
+  border-style: solid;
+  padding: 10px;
+  min-width: 200px;
+}
+
+th {
+  background-color: var(--primary-gray);
+  color: white;
+  text-align: start;
 }
 
 .link {
@@ -42,15 +59,17 @@ table.center {
   text-transform: uppercase;
   color: white;
   padding: 15px;
+  font-weight: 600;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .link:hover {
-  color: #e2cc0580;
+  text-decoration: underline;
 }
 
 .nav-container {
   display: flex;
-  background-color: #0283aa;
+  background-color: var(--primary-blue);
   padding: 10px;
   align-items: center;
   justify-content: space-between;
@@ -59,13 +78,13 @@ table.center {
 .add-movie {
   display: flex;
   gap: 20px;
-  justify-content: space-around;
+  justify-content: center;
 }
 
 .button {
   border: 0;
   outline: 0;
-  height: 30px;
+  height: 33px;
   width: auto;
   min-width: 80px;
   color: white;

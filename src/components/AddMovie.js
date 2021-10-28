@@ -1,10 +1,10 @@
 import { useContext, useState } from "react";
 import { MovieContext } from "../contexts/MovieContext";
 
-const addmovie = {
+const styles = {
     buttonContainer: {
         display: 'flex',
-        gap: '10px'
+        gap: '5px'
     },
     addButton: {
         backgroundColor: '#5eeb34'
@@ -56,20 +56,44 @@ const AddMovie = () => {
             <h3>Add a Movie</h3>
             <form onSubmit={handleSubmit} className='add-movie'>
                 <div>
-                    Name: <input type='text' id='name-input' value={name} onChange={handleNameChange}/>
+                    <input 
+                    type='text' 
+                    id='name-input' 
+                    value={name} 
+                    required 
+                    placeholder='Name' 
+                    onChange={handleNameChange}/>
                 </div>
                 <div>
-                    Year: <input type='text' id='year-input' value={year} onChange={handleYearChange}/>
+                    <input 
+                    type='text' 
+                    id='year-input' 
+                    value={year}
+                    required 
+                    placeholder='Year' 
+                    onChange={handleYearChange}/>
                 </div>
                 <div>
-                    Rating: <input type='text' id='rating-input' value={rating} onChange={handleRatingChange}/>
+                    <input 
+                    type='text' 
+                    id='rating-input' 
+                    value={rating}
+                    required 
+                    placeholder='Rating' 
+                    onChange={handleRatingChange}/>
                 </div>
                 <div>
-                    Genre: <input type='text' id='genre-input' value={genre} onChange={handleGenreChange}/>
+                    <input 
+                    type='text' 
+                    id='genre-input' 
+                    value={genre}
+                    required 
+                    placeholder='Genre'
+                    onChange={handleGenreChange}/>
                 </div>
-                <div style={addmovie.buttonContainer}>
-                    <input type='submit' value='Add' className='button' style={addmovie.addButton}/>
-                    <input type='reset' value='Reset' className='button' style={addmovie.resetButton} onClick={handleReset}/>
+                <div style={styles.buttonContainer}>
+                    <input type='submit' value='Add' className='button' style={styles.addButton}/>
+                    <input type='reset' value='Reset' className='button' style={styles.resetButton} onClick={handleReset}/>
                 </div>
             </form>
         </div>
