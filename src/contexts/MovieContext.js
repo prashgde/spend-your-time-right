@@ -1,34 +1,10 @@
 import { createContext, useState } from "react";
+import initialMovies from './movies.json';
 
 export const MovieContext = createContext();
 
 export const MovieProvider = props => {
-    const [movies, setMovies] = useState([
-        {
-            name: "Iron Man",
-            year: 2008,
-            genre: "superhero",
-            rating: 10
-        },
-        {
-            name: "Inception",
-            year: 2010,
-            genre: "sci-fi",
-            rating: 10
-        },
-        {
-            name: "Crazy, Stupid, Love",
-            year: 2011,
-            genre: "romance",
-            rating: 8.5
-        },
-        {
-            name: "The Internship",
-            year: 2013,
-            genre: "comedy",
-            rating: 10
-        }
-    ]);
+    const [movies, setMovies] = useState(initialMovies);
 
     return (
         <MovieContext.Provider value={[movies, setMovies]}>
