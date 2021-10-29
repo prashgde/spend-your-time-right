@@ -1,6 +1,6 @@
 :root {
-  --primary-blue: #04a6d8;
-  --primary-gray: #50555a;
+  --color-primary-blue: #04a6d8;
+  --color-primary-gray: #50555a;
 }
 
 * {
@@ -14,7 +14,7 @@ h1, h2, h3, h4, h5, h6 {
 h1, h2, h3 {
   text-transform: uppercase;
   margin-top: 40px;
-  color: var(--primary-gray);
+  color: var(--color-primary-gray);
 }
 
 input {
@@ -41,7 +41,7 @@ table{
 }
 
 th, td {
-  border-color: var(--primary-blue);
+  border-color: var(--color-primary-blue);
   border-width: 1px;
   border-style: solid;
   padding: 10px;
@@ -49,7 +49,7 @@ th, td {
 }
 
 th {
-  background-color: var(--primary-gray);
+  background-color: var(--color-primary-gray);
   color: white;
   text-align: start;
 }
@@ -69,7 +69,7 @@ th {
 
 .nav-container {
   display: flex;
-  background-color: var(--primary-blue);
+  background-color: var(--color-primary-blue);
   padding: 10px;
   align-items: center;
   justify-content: space-between;
@@ -89,30 +89,53 @@ th {
   min-width: 80px;
   color: white;
   text-transform: uppercase;
-  font-weight: 600;  
+  font-weight: 600;
+  cursor: pointer;
 }
 
 .button:hover {
   filter: brightness(85%);  
 }
 
+.box-in-a-page {
+  width: 350px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 10px;
+  border-style: groove;
+  border-width: 1px;
+  border-color: var(--color-primary-gray);
+}
 
-#search:hover + #search-input {
-  visibility: visible;
-  animation-name: appearing-search-bar;
-  /*animation-name: appearing-search-bar;
+.sub-heading {
+  color: var(--color-primary-blue);
+}
+
+#search-input {
+  margin-left: -28px;
+  z-index: 2;
+  min-width: 300px;
+  padding-left: 28px;
+}
+
+#search {
+  z-index: 4;
+}
+
+#search-bar {
+  display: flex;
+  align-items: center;
+  animation: appearing-search-bar;
   animation-duration: 2s;
-  animation-fill-mode: forwards;*/
+  animation-fill-mode: forwards;
+  animation-direction: normal;
 }
 
 @keyframes appearing-search-bar {
-  0% {opacity: 0;}
-  100% {opacity: 100%;}
-}
-#search-input, #search-input:focus {
-  border: 0;
-  outline: none;
-  height: 30px;
-  background-color: #7ed1eb;
-  color: black;
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
