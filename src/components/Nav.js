@@ -6,6 +6,7 @@ import AddMovie from "./AddMovie";
 import 'boxicons';
 import { useState } from "react";
 import Movies from "./Movies";
+import SearchBar from "./SearchBar";
 
 const Nav = () => {
     const [searchString, setSearchString] = useState('');
@@ -17,10 +18,10 @@ const Nav = () => {
     return (
         <Router>
             <div className='nav-container'>
-                <div style={{'display': 'flex', 'align-items': 'center'}}>
+                <div style={{ 'display': 'flex', 'align-items': 'center', 'gap': '30px' }}>
                     <Link className='link' to='/'>Home</Link>
-                    <box-icon name='search' id='search' color='white'></box-icon>
-                    <input type='text' id='search-input' onChange={handleSearchStringChange}/>
+                    <SearchBar
+                        handleSearchStringChange={handleSearchStringChange} />
                 </div>
                 <div>
                     <Link className='link' to='/about'>About</Link>
@@ -34,7 +35,7 @@ const Nav = () => {
                 <Route path='/login'><LoginControl /></Route>
                 <Route path='/'>
                     <AddMovie />
-                    <Movies searchString={searchString}/>
+                    <Movies searchString={searchString} />
                 </Route>
             </Switch>
         </Router>
