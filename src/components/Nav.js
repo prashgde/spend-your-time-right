@@ -2,7 +2,6 @@ import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import About from "./About";
 import ContactUs from "./ContactUs";
 import AddMovie from "./AddMovie";
-import 'boxicons';
 import { useState } from "react";
 import Movies from "./Movies";
 import SearchBar from "./SearchBar";

@@ -1,4 +1,5 @@
 import { useLocation } from "react-router";
+import 'boxicons';
 
 const SearchBar = ({ handleSearchStringChange }) => {
 

@@ -51,7 +51,23 @@ th, td {
 th {
   background-color: var(--color-primary-gray);
   color: white;
-  text-align: start;
+}
+
+.sortable-table-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sortable-table-header button {
+  height: 24px;
+  background-color: var(--color-primary-gray);
+  border: none;
+}
+
+.sortable-table-header button:hover {
+    cursor: pointer;
+    box-shadow: #50555a;
 }
 
 .link {
