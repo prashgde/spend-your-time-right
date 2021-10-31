@@ -1,7 +1,6 @@
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import About from "./About";
 import ContactUs from "./ContactUs";
-import LoginControl from "./LoginControl";
 import AddMovie from "./AddMovie";
 import 'boxicons';
 import { useState } from "react";
@@ -26,13 +25,11 @@ const Nav = () => {
                 <div>
                     <Link className='link' to='/about'>About</Link>
                     <Link className='link' to='/contactus'>Contact Us</Link>
-                    <Link className='link' to='/login'>Login</Link>
                 </div>
             </div>
             <Switch>
                 <Route path='/about'><About /></Route>
                 <Route path='/contactus'><ContactUs /></Route>
-                <Route path='/login'><LoginControl /></Route>
                 <Route path='/'>
                     <AddMovie />
                     <Movies searchString={searchString} />
