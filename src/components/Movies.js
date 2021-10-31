@@ -7,7 +7,7 @@ import SortableTableHeader from "./SortableTableHeader";
 const Movies = ({ searchString }) => {
     const [movies] = useContext(MovieContext);
     const [searchedMovies, setSearchedMovies] = useState(movies);
-
+    
     useEffect(() => {
         if (searchString) {
             setSearchedMovies(movies.filter(movie =>
@@ -17,22 +17,26 @@ const Movies = ({ searchString }) => {
         }
     }, [searchString, movies])
 
+    const handleSort = (sortButtonId) => {
+        console.log(sortButtonId);
+    }
+
     const searchResults =
         searchedMovies.length === 0 ? <h4>No Movies Found</h4> :
             <table className='center'>
                 <thead>
                     <tr>
                         <th>
-                            <SortableTableHeader title='Name' active={true} />
+                            <SortableTableHeader title='Name' handleSort={handleSort}/>
                         </th>
                         <th>
-                            <SortableTableHeader title='Year' active={false} />
+                            <SortableTableHeader title='Year' handleSort={handleSort}/>
                         </th>
                         <th>
-                            <SortableTableHeader title='Rating' active={false} />
+                            <SortableTableHeader title='Rating' handleSort={handleSort}/>
                         </th>
                         <th>
-                            <SortableTableHeader title='Genre' active={false} />
+                            <SortableTableHeader title='Genre' handleSort={handleSort}/>
                         </th>
                     </tr>
                 </thead>

@@ -1,12 +1,17 @@
-const SortableTableHeader = ({ title, active }) => {
-    const primaryBlue = '#04a6d8';
-    const color = active ? primaryBlue : 'white';
+import SortButton from "./SortButton";
+
+const SortableTableHeader = ({ title, handleSort }) => {
+    
+    const idAsc = `sort-asc-${title.toLowerCase()}`;
+    const idDes = `sort-des-${title.toLowerCase()}`;
+
     return (
         <div className='sortable-table-header'>
             <label>{title}</label>
-            <button>
-                <box-icon name='up-arrow' type='solid' id='sort-asc-genre' color={color}></box-icon>
-            </button>
+            <div>
+                <SortButton id={idAsc} handleSort={handleSort}/>
+                <SortButton id={idDes} handleSort={handleSort}/>
+            </div>
         </div>
     );
 }
