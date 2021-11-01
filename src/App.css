@@ -58,19 +58,19 @@ td {
   padding: 10px;
 }
 
-.sortable-table-header {
+.table-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.sortable-table-header button {
+.table-header button {
   height: 24px;
   background-color: var(--color-primary-gray);
   border: none;
 }
 
-.sortable-table-header button:hover {
+.table-header button:hover {
     cursor: pointer;
     margin: 0;
 }

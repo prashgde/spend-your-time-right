@@ -1,13 +1,9 @@
-import { useState } from "react";
-
-const SortButton = ({id, handleSort}) => {
+const SortButton = ({id, active, handleSort}) => {
     const primaryBlue = '#04a6d8';
-    const [active, setActive] = useState(false);
     const color = active ? primaryBlue : 'white';
     const name = id.includes('asc') ? 'up-arrow' : 'down-arrow';
 
     const handleClick = id => {
-        setActive(true);
         handleSort(id);
     }
     
