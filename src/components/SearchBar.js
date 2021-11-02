@@ -4,6 +4,10 @@ import 'boxicons';
 const SearchBar = ({ handleSearchStringChange }) => {
 
     const { pathname } = useLocation();
+    const onSearchStringChange = e => {
+        e.preventDefault();
+        handleSearchStringChange(e.target.value);
+    }
 
     const searchBar = pathname.split('/')[1] === '' ?
         <div id='search-bar'>
@@ -11,7 +15,7 @@ const SearchBar = ({ handleSearchStringChange }) => {
             <input
                 type='text'
                 id='search-input'
-                onChange={handleSearchStringChange}
+                onChange={onSearchStringChange}
                 placeholder='  search movies' />
         </div>
         :

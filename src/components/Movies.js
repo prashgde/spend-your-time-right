@@ -10,33 +10,45 @@ const Movies = ({ searchString }) => {
     const [movies] = useContext(MovieContext);
     const [searchedMovies, setSearchedMovies] = useState(movies);
     const [sortConfig, setSortConfig] = useState({
-        key: 'Name',
+        key: 'name',
         order: 'asc'
     });
-    
+
     useEffect(() => {
-        if (searchString) {
-            setSearchedMovies(movies.filter(movie =>
-                movie.name.toLowerCase().includes(searchString.trim().toLowerCase())));
-        } else {
-            setSearchedMovies(movies);
-        }
-    }, [searchString, movies])
+        (async () => {
+            const compareMovies = (movie1, movie2) =>
+                sortConfig.order === 'asc' ?
+                    movie1[sortConfig.key].toString().localeCompare(movie2[sortConfig.key]) :
+                    -(movie1[sortConfig.key].toString().localeCompare(movie2[sortConfig.key]));
+
+            if (searchString) {
+                setSearchedMovies(movies.filter(movie =>
+                    movie.name.toLowerCase().includes(searchString.trim().toLowerCase()))
+                    .sort((movie1, movie2) => compareMovies(movie1, movie2))
+                );
+            } else {
+                setSearchedMovies(movies.sort((movie1, movie2) => compareMovies(movie1, movie2)));
+            }
+        })();
+    }, [searchString, movies, sortConfig])
 
     const handleSort = (sortButtonId) => {
+        console.log(sortButtonId);
+
         const order = sortButtonId.toLowerCase().includes('asc') ? 'asc' : 'des';
         let key;
-        if(sortButtonId.toLowerCase().includes('name')) {
-            key = 'Name';
-        } else if(sortButtonId.toLowerCase().includes('year')) {
-            key ='Year';
-        } else if(sortButtonId.toLowerCase().includes('rating')) {
-            key = 'Rating';
-        } else if(sortButtonId.toLowerCase().includes('genre')) {
-            key = 'Genre';
+        if (sortButtonId.toLowerCase().includes('name')) {
+            key = 'name';
+        } else if (sortButtonId.toLowerCase().includes('year')) {
+            key = 'year';
+        } else if (sortButtonId.toLowerCase().includes('rating')) {
+            key = 'rating';
+        } else if (sortButtonId.toLowerCase().includes('genre')) {
+            key = 'genre';
         }
-        setSortConfig({key, order});
-        console.log(sortConfig)
+        setSortConfig(previousSortConfig => ({ ...previousSortConfig, key, order }));
+
+        console.log(sortConfig);
     }
 
     const searchResults =
