@@ -9,32 +9,42 @@ const titles = ['Name', 'Year', 'Rating', 'Genre'];
 const Movies = ({ searchString }) => {
     const [movies] = useContext(MovieContext);
     const [searchedMovies, setSearchedMovies] = useState(movies);
+
     const [sortConfig, setSortConfig] = useState({
         key: 'name',
         order: 'asc'
     });
 
     useEffect(() => {
-        (async () => {
-            const compareMovies = (movie1, movie2) =>
-                sortConfig.order === 'asc' ?
-                    movie1[sortConfig.key].toString().localeCompare(movie2[sortConfig.key]) :
-                    -(movie1[sortConfig.key].toString().localeCompare(movie2[sortConfig.key]));
+        const compareMovies = (movie1, movie2) => {
+            switch (typeof movie1[sortConfig.key]) {
+                case 'number':
+                    return sortConfig.order === 'asc' ?
+                        movie1[sortConfig.key] - movie2[sortConfig.key] :
+                        -(movie1[sortConfig.key] - movie2[sortConfig.key])
 
-            if (searchString) {
-                setSearchedMovies(movies.filter(movie =>
-                    movie.name.toLowerCase().includes(searchString.trim().toLowerCase()))
-                    .sort((movie1, movie2) => compareMovies(movie1, movie2))
-                );
-            } else {
-                setSearchedMovies(movies.sort((movie1, movie2) => compareMovies(movie1, movie2)));
+                case 'string':
+                    return sortConfig.order === 'asc' ?
+                        movie1[sortConfig.key].toString().localeCompare(movie2[sortConfig.key]) :
+                        -(movie1[sortConfig.key].toString().localeCompare(movie2[sortConfig.key]));
+
+                default:
+                    return 0;
             }
-        })();
+        }
+
+        if (searchString) {
+            setSearchedMovies(movies.filter(movie =>
+                movie.name.toLowerCase().includes(searchString.trim().toLowerCase()))
+                .sort((movie1, movie2) => compareMovies(movie1, movie2))
+            );
+        } else {
+            setSearchedMovies([...movies].sort((movie1, movie2) => compareMovies(movie1, movie2)));
+        }
     }, [searchString, movies, sortConfig])
 
-    const handleSort = (sortButtonId) => {
-        console.log(sortButtonId);
 
+    const handleSort = (sortButtonId) => {
         const order = sortButtonId.toLowerCase().includes('asc') ? 'asc' : 'des';
         let key;
         if (sortButtonId.toLowerCase().includes('name')) {
@@ -46,9 +56,9 @@ const Movies = ({ searchString }) => {
         } else if (sortButtonId.toLowerCase().includes('genre')) {
             key = 'genre';
         }
-        setSortConfig(previousSortConfig => ({ ...previousSortConfig, key, order }));
 
-        console.log(sortConfig);
+        setSortConfig(previousSortConfig => ({ ...previousSortConfig, key, order }));
+        //setSortConfig({ key, order });
     }
 
     const searchResults =
