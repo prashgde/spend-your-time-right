@@ -44,14 +44,39 @@ th, td {
   border-color: var(--color-primary-blue);
   border-width: 1px;
   border-style: solid;
-  padding: 10px;
   min-width: 200px;
 }
 
 th {
   background-color: var(--color-primary-gray);
   color: white;
-  text-align: start;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+td {
+  padding: 10px;
+}
+
+.table-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.table-header button {
+  height: 24px;
+  background-color: var(--color-primary-gray);
+  border: none;
+}
+
+.table-header button:hover {
+    cursor: pointer;
+    margin: 0;
+}
+
+.sort-button-container {
+  height: 24px;
 }
 
 .link {

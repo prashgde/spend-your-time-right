@@ -1,29 +1,76 @@
 import { useContext, useEffect, useState } from "react";
 import { MovieContext } from "../contexts/MovieContext";
 import Movie from "./Movie";
+import 'boxicons';
+import TableHeader from "./TableHeader";
+
+const titles = ['Name', 'Year', 'Rating', 'Genre'];
 
 const Movies = ({ searchString }) => {
     const [movies] = useContext(MovieContext);
     const [searchedMovies, setSearchedMovies] = useState(movies);
 
+    const [sortConfig, setSortConfig] = useState({
+        key: 'name',
+        order: 'asc'
+    });
+
     useEffect(() => {
+        const compareMovies = (movie1, movie2) => {
+            switch (typeof movie1[sortConfig.key]) {
+                case 'number':
+                    return sortConfig.order === 'asc' ?
+                        movie1[sortConfig.key] - movie2[sortConfig.key] :
+                        -(movie1[sortConfig.key] - movie2[sortConfig.key])
+
+                case 'string':
+                    return sortConfig.order === 'asc' ?
+                        movie1[sortConfig.key].toString().localeCompare(movie2[sortConfig.key]) :
+                        -(movie1[sortConfig.key].toString().localeCompare(movie2[sortConfig.key]));
+
+                default:
+                    return 0;
+            }
+        }
+
         if (searchString) {
             setSearchedMovies(movies.filter(movie =>
-                movie.name.toLowerCase().includes(searchString.trim().toLowerCase())));
+                movie.name.toLowerCase().includes(searchString.trim().toLowerCase()))
+                .sort((movie1, movie2) => compareMovies(movie1, movie2))
+            );
         } else {
-            setSearchedMovies(movies);
+            setSearchedMovies([...movies].sort((movie1, movie2) => compareMovies(movie1, movie2)));
         }
-    }, [searchString, movies])
+    }, [searchString, movies, sortConfig])
+
+
+    const handleSort = (sortButtonId) => {
+        const order = sortButtonId.toLowerCase().includes('asc') ? 'asc' : 'des';
+        let key;
+        if (sortButtonId.toLowerCase().includes('name')) {
+            key = 'name';
+        } else if (sortButtonId.toLowerCase().includes('year')) {
+            key = 'year';
+        } else if (sortButtonId.toLowerCase().includes('rating')) {
+            key = 'rating';
+        } else if (sortButtonId.toLowerCase().includes('genre')) {
+            key = 'genre';
+        }
+
+        setSortConfig(previousSortConfig => ({ ...previousSortConfig, key, order }));
+        //setSortConfig({ key, order });
+    }
 
     const searchResults =
         searchedMovies.length === 0 ? <h4>No Movies Found</h4> :
             <table className='center'>
                 <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Year</th>
-                        <th>Rating</th>
-                        <th>Genre</th>
+                        {titles.map(title =>
+                            <th>
+                                <TableHeader title={title} sortConfig={sortConfig} handleSort={handleSort} />
+                            </th>
+                        )}
                     </tr>
                 </thead>
                 <tbody>
