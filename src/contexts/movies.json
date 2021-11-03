@@ -22,5 +22,11 @@
         "year": 2013,
         "genre": "comedy",
         "rating": 10
+    },
+    {
+        "name": "The Invitation",
+        "year": 2015,
+        "genre": "comedy",
+        "rating": 7
     }
 ]

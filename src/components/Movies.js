@@ -19,14 +19,13 @@ const Movies = ({ searchString }) => {
         const compareMovies = (movie1, movie2) => {
             switch (typeof movie1[sortConfig.key]) {
                 case 'number':
-                    return sortConfig.order === 'asc' ?
-                        movie1[sortConfig.key] - movie2[sortConfig.key] :
-                        -(movie1[sortConfig.key] - movie2[sortConfig.key])
+                    const result = movie1[sortConfig.key] - movie2[sortConfig.key]
+                    return sortConfig.order === 'asc' ? result : -result;
 
                 case 'string':
                     return sortConfig.order === 'asc' ?
-                        movie1[sortConfig.key].toString().localeCompare(movie2[sortConfig.key]) :
-                        -(movie1[sortConfig.key].toString().localeCompare(movie2[sortConfig.key]));
+                        movie1[sortConfig.key].localeCompare(movie2[sortConfig.key]) :
+                        -(movie1[sortConfig.key].localeCompare(movie2[sortConfig.key]));
 
                 default:
                     return 0;
