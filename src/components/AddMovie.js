@@ -69,7 +69,7 @@ const AddMovie = () => {
         if(!inputRating) {
             setRatingError('');
         } else {
-            if (!/^\d+$/.test(inputRating) || (inputRating < 1 || inputRating > 10)) {
+            if (!/^\d(\.\d+)?$/.test(inputRating) || (inputRating < 1 || inputRating > 10)) {
                 setRatingError(`Please enter a valid rating`);
             } else {
                 setRatingError('');
