@@ -58,6 +58,36 @@ td {
   padding: 10px;
 }
 
+.add-movie-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 150px;
+}
+
+.add-movie-form {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+}
+
+.add-movie {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+
+.add-movie div {
+  flex-basis: 200px;
+}
+
+.input-error {
+  color: red;
+  font-size: 12px;
+  padding: 2px;
+}
+
 .table-header {
   display: flex;
   justify-content: space-between;
@@ -98,12 +128,6 @@ td {
   padding: 10px;
   align-items: center;
   justify-content: space-between;
-}
-
-.add-movie {
-  display: flex;
-  gap: 20px;
-  justify-content: center;
 }
 
 .button {
