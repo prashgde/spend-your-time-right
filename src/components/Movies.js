@@ -64,7 +64,7 @@ const Movies = ({ searchString }) => {
 
     const searchResults =
         searchedMovies.length === 0 ? <h4>No Movies Found</h4> :
-            <table className='center'>
+            <table>
                 <thead>
                     <tr>
                         <th className='serialNo'>No.</th>
