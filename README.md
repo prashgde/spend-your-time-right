@@ -1,4 +1,4 @@
-#What it is
+# What it is
 
 spend-your-time-right is simple website with an elegant ui that suggests a hundred great movies, that ensures you spend your time right not just when you watch them movies but when you have fun learning React.
 
