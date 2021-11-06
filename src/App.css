@@ -44,7 +44,6 @@ th, td {
   border-color: var(--color-primary-blue);
   border-width: 1px;
   border-style: solid;
-  min-width: 200px;
 }
 
 th {
@@ -103,6 +102,10 @@ td {
 .table-header button:hover {
     cursor: pointer;
     margin: 0;
+}
+
+.table-info-column {
+  min-width: 120px;
 }
 
 .sort-button-container {
@@ -187,4 +190,9 @@ td {
   100% {
     opacity: 1;
   }
+}
+
+.serialNo {
+  text-align: left;
+  width: 50px;
 }
