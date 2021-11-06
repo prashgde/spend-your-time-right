@@ -1,9 +1,10 @@
 import { useLocation } from "react-router";
 import 'boxicons';
 
-const SearchBar = ({ handleSearchStringChange }) => {
+const SearchBar = ({ searchString, handleSearchStringChange }) => {
 
     const { pathname } = useLocation();
+
     const onSearchStringChange = e => {
         e.preventDefault();
         handleSearchStringChange(e.target.value);
@@ -15,6 +16,7 @@ const SearchBar = ({ handleSearchStringChange }) => {
             <input
                 type='text'
                 id='search-input'
+                value={searchString}
                 onChange={onSearchStringChange}
                 placeholder='  search movies' />
         </div>
