@@ -10,9 +10,11 @@ const Movies = ({ searchString }) => {
     const [movies] = useContext(MovieContext);
     const [searchedMovies, setSearchedMovies] = useState(movies);
 
+    let serialNo = 1;
+
     const [sortConfig, setSortConfig] = useState({
-        key: 'name',
-        order: 'asc'
+        key: 'rating',
+        order: 'des'
     });
 
     useEffect(() => {
@@ -65,8 +67,9 @@ const Movies = ({ searchString }) => {
             <table className='center'>
                 <thead>
                     <tr>
+                        <th className='serialNo'>No.</th>
                         {titles.map(title =>
-                            <th>
+                            <th className='table-info-column'>
                                 <TableHeader title={title} sortConfig={sortConfig} handleSort={handleSort} />
                             </th>
                         )}
@@ -74,7 +77,7 @@ const Movies = ({ searchString }) => {
                 </thead>
                 <tbody>
                     {searchedMovies.map(movie =>
-                        <Movie movie={movie} />
+                        <Movie movie={movie} serialNo={serialNo++}/>
                     )}
                 </tbody>
             </table>

@@ -161,10 +161,10 @@
         "id": 22
     },
     {
-        "name": "The Notebook",
-        "year": 2004,
-        "genre": "comedy",
-        "rating": 8,
+        "name": "Now You See Me",
+        "year": 2013,
+        "genre": "thriller",
+        "rating": 10,
         "id": 23
     },
     {
@@ -203,11 +203,11 @@
         "id": 28
     },
     {
-        "name": "Triangle",
-        "year": 2009,
-        "genre": "sci-fi",
-        "rating": 9.5,
-        "id": 29
+        "name": "Now You See Me 2",
+        "year": 2016,
+        "genre": "thriller",
+        "rating": 10,
+        "id": 68
     },
     {
         "name": "Liar Liar",
@@ -479,20 +479,6 @@
         "name": "Harry Potter and the Deathly Hallows Part 2",
         "year": 2011,
         "genre": "fantasy",
-        "rating": 10,
-        "id": 68
-    },
-    {
-        "name": "Now You See Me",
-        "year": 2013,
-        "genre": "thriller",
-        "rating": 10,
-        "id": 67
-    },
-    {
-        "name": "Now You See Me 2",
-        "year": 2016,
-        "genre": "thriller",
         "rating": 10,
         "id": 68
     },
