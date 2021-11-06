@@ -165,6 +165,7 @@ const AddMovie = () => {
                                 <option value='mystery' />
                                 <option value='crime' />
                                 <option value='fantasy' />
+                                <option value='drama' />
                             </datalist>
                     </div>
                     <div style={styles.buttonContainer}>
