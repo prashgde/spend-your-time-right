@@ -1,5 +1,6 @@
 import { useContext, useState } from "react";
 import { MovieContext } from "../contexts/MovieContext";
+import { currentYear } from "../constants/constants";
 
 const styles = {
     buttonContainer: {
@@ -28,7 +29,6 @@ const AddMovie = () => {
     const [ratingError, setRatingError] = useState('');
 
     const minYear = 1800;
-    const currentYear = new Date().getFullYear();
     const yearInputHelperText = `Year (${minYear} - ${currentYear})`
     const ratingInputHelperText = `Rating (1 - 10)`
 

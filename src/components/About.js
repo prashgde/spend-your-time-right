@@ -4,7 +4,7 @@ const About = () => {
         <>
             <h3>About</h3>
             <div className='box-in-a-page'>
-                <h4 className='sub-heading'>Rainmaker</h4>
+                <h4 className='sub-heading'>Prasanna Hegde</h4>
                 <p>
                     Skillful software engineer proficient at
                     delivering highly scalable and
