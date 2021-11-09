@@ -7,13 +7,11 @@ import TableHeader from "./TableHeader";
 const titles = ['Name', 'Year', 'Rating', 'Genre'];
 
 const Movies = ({ searchString }) => {
-    const {movieValue, imdbCheckedValue} = useContext(MovieContext);
+    const { movieValue, imdbCheckedValue } = useContext(MovieContext);
     const [imdbChecked, setImdbChecked] = imdbCheckedValue;
     const [movies] = movieValue;
 
     const [searchedMovies, setSearchedMovies] = useState(movies);
-
-    let serialNo = 1;
 
     const [sortConfig, setSortConfig] = useState({
         key: 'rating',
@@ -22,32 +20,32 @@ const Movies = ({ searchString }) => {
 
     useEffect(() => {
         //console.log('Toggled:' + imdbChecked);
-        const selectedMovies = imdbChecked ? 
-        [{
-            name: 'The Shawshank Redemption',
-            year: 1994,
-            rating: 9.3,
-            genre: 'drama'
-        },
-        {
-            name: 'The Godfather',
-            year: 1972,
-            rating: 9.2,
-            genre: 'crime, drama'
-        },
-        {
-            name: 'The Dark Knight',
-            year: 2008,
-            rating: 9.0,
-            genre: 'action, crime, drama'
-        },
-        {
-            name: 'The Godfather: Part II',
-            year: 1974,
-            rating: 9.0,
-            genre: 'crime, drama'
-        }] :
-        [...movies];        
+        const selectedMovies = imdbChecked ?
+            [{
+                name: 'The Shawshank Redemption',
+                year: 1994,
+                rating: 9.3,
+                genre: 'drama'
+            },
+            {
+                name: 'The Godfather',
+                year: 1972,
+                rating: 9.2,
+                genre: 'crime, drama'
+            },
+            {
+                name: 'The Dark Knight',
+                year: 2008,
+                rating: 9.0,
+                genre: 'action, crime, drama'
+            },
+            {
+                name: 'The Godfather: Part II',
+                year: 1974,
+                rating: 9.0,
+                genre: 'crime, drama'
+            }] :
+            [...movies];
 
         const compareMovies = (movie1, movie2) => {
             switch (typeof movie1[sortConfig.key]) {
@@ -112,8 +110,8 @@ const Movies = ({ searchString }) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {searchedMovies.map(movie =>
-                        <Movie movie={movie} serialNo={serialNo++}/>
+                    {searchedMovies.map((movie, index) =>
+                        <Movie movie={movie} serialNo={index + 1} />
                     )}
                 </tbody>
             </table>
@@ -122,11 +120,12 @@ const Movies = ({ searchString }) => {
         <div className='movies'>
             <h3>Movies</h3>
             <div className='switch'>
-                <input 
-                type='checkbox' 
-                id='imdb' name='imdb' 
-                checked={imdbChecked}
-                onChange={handleImdbChecked}
+                <input
+                    type='checkbox'
+                    id='imdb' 
+                    name='imdb'
+                    checked={imdbChecked}
+                    onChange={handleImdbChecked}
                 />
                 <label for='imdb'>{imdbSwitchText}</label>
             </div>

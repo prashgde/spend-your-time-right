@@ -69,6 +69,8 @@ td {
 .switch {
   display: flex;
   align-items: center;
+  justify-content: flex-start;
+  width: 250px;
 }
 
 .footer {
