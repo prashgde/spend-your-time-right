@@ -17,7 +17,8 @@ const styles = {
 let movieId = 4;
 
 const AddMovie = () => {
-    const [movies, setMovies] = useContext(MovieContext);
+    const { movieValue } = useContext(MovieContext);
+    const [movies, setMovies] = movieValue;
 
     const [name, setName] = useState('');
     const [year, setYear] = useState('');
@@ -62,7 +63,6 @@ const AddMovie = () => {
         }
 
         setYear(inputYear);
-
     }
 
     const handleRatingChange = e => {
