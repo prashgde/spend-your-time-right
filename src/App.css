@@ -1,7 +1,7 @@
 :root {
   --color-primary-blue: #04a6d8;
   --color-primary-gray: #50555a;
-  --color-primary-gree: #00960F;
+  --color-primary-green: #00960F;
 }
 
 * {
@@ -177,7 +177,7 @@ td {
 }
 
 .sub-heading {
-  color: #5eeb34;
+  color: var(--color-primary-green);
 } 
 
 .copyright-info {
