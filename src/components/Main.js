@@ -18,7 +18,7 @@ const Main = () => {
         <Router>
             <div className='nav-container'>
                 <div style={{ 'display': 'flex', 'align-items': 'center', 'gap': '30px' }}>
-                    <Link className='link' to='/'>Home</Link>
+                    <Link id='homeLink' className='link' to='/'>Your Next Movies</Link>
                     <SearchBar
                         searchString={searchString}
                         handleSearchStringChange={handleSearchStringChange} 

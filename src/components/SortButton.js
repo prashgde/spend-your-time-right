@@ -1,6 +1,6 @@
 const SortButton = ({id, active, handleSort}) => {
-    const primaryBlue = '#04a6d8';
-    const color = active ? primaryBlue : 'white';
+    const selectedColor = '#00960F';
+    const color = active ? selectedColor : 'white';
     const name = id.includes('asc') ? 'up-arrow' : 'down-arrow';
 
     const handleClick = id => {

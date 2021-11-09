@@ -1,6 +1,7 @@
 :root {
   --color-primary-blue: #04a6d8;
   --color-primary-gray: #50555a;
+  --color-primary-gree: #00960F;
 }
 
 * {
@@ -41,21 +42,17 @@ table{
   margin-bottom: 100px;
 }
 
-th, td {
-  border-color: var(--color-primary-blue);
-  border-width: 1px;
-  border-style: solid;
-}
-
 th {
   background-color: var(--color-primary-gray);
   color: white;
   padding-left: 10px;
   padding-right: 10px;
+  text-transform: uppercase;
 }
 
 td {
   padding: 10px;
+  height: 30px;
 }
 
 .app {
@@ -102,8 +99,10 @@ td {
 
 .table-header {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
+  height: 60px;
+  gap: 10px;
 }
 
 .table-header button {
@@ -177,8 +176,21 @@ td {
   border-color: var(--color-primary-gray);
 }
 
-.sub-heading, .copyright-info {
+.sub-heading {
+  color: #5eeb34;
+} 
+
+.copyright-info {
   color: var(--color-primary-blue);
+}
+
+#homeLink {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+#homeLink:hover {
+  text-decoration: none;
 }
 
 #search-input {
