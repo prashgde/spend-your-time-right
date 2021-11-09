@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { MovieContext } from "../contexts/MovieContext";
-import { currentYear } from "../constants/constants";
+import { currentYear, genres } from "../constants/constants";
 
 const styles = {
     buttonContainer: {
@@ -8,9 +8,9 @@ const styles = {
         gap: '5px'
     },
     addButton: {
-        backgroundColor: '#5eeb34'
+        backgroundColor: '#00960F'
     }, resetButton: {
-        backgroundColor: '#779091'
+        backgroundColor: '#f55b18'
     }
 }
 
@@ -27,31 +27,31 @@ const AddMovie = () => {
     const [nameError, setNameError] = useState('');
     const [yearError, setYearError] = useState('');
     const [ratingError, setRatingError] = useState('');
+    const [genreError, setGenreError] = useState('');
 
     const minYear = 1800;
     const yearInputHelperText = `Year (${minYear} - ${currentYear})`
     const ratingInputHelperText = `Rating (1 - 10)`
 
-
     const handleNameChange = e => {
         const inputName = e.target.value;
 
-        if(!inputName) {
+        if (!inputName) {
             setNameError('');
         }
-        else if(inputName.trim() === '') {
+        else if (inputName.trim() === '') {
             setNameError('Please enter a valid name');
         } else {
             setNameError('');
         }
-        
+
         setName(inputName);
     }
 
     const handleYearChange = e => {
         const inputYear = e.target.value;
 
-        if(!inputYear)
+        if (!inputYear)
             setYearError('');
         else {
             if (!/^\d+$/.test(inputYear) || (inputYear < minYear || inputYear > currentYear)) {
@@ -68,7 +68,7 @@ const AddMovie = () => {
     const handleRatingChange = e => {
         const inputRating = e.target.value;
 
-        if(!inputRating) {
+        if (!inputRating) {
             setRatingError('');
         } else {
             if (!/^\d(\.\d+)?$/.test(inputRating) || (inputRating < 1 || inputRating > 10)) {
@@ -82,14 +82,20 @@ const AddMovie = () => {
     }
 
     const handleGenreChange = e => {
+        if (!genres.includes(e.target.value)) {
+            setGenreError('Please select a valid genre');
+        } else {
+            setGenreError('');
+        }
         setGenre(e.target.value)
     }
 
     const handleSubmit = e => {
         e.preventDefault();
-        if (!movies.find(movie => movie.name.toLowerCase() === name.trim().toLowerCase())) {
-            setMovies(previousMovies => [...previousMovies, { name, year, rating, genre, id: movieId++ }]);
-        }
+        if (!nameError && !yearError && !ratingError && !genreError)
+            if (!movies.find(movie => movie.name.toLowerCase() === name.trim().toLowerCase())) {
+                setMovies(previousMovies => [...previousMovies, { name, year, rating, genre, id: movieId++ }]);
+            }
     }
 
     const handleReset = () => {
@@ -97,6 +103,10 @@ const AddMovie = () => {
         setRating('');
         setYear('');
         setGenre('');
+        setNameError('');
+        setRatingError('');
+        setYearError('');
+        setGenreError('');
     }
 
     return (
@@ -106,13 +116,13 @@ const AddMovie = () => {
                 <div className='add-movie'>
                     <div>
                         <div>
-                        <input
-                            type='text'
-                            id='name-input'
-                            value={name}
-                            required
-                            placeholder='Name'
-                            onChange={handleNameChange} />
+                            <input
+                                type='text'
+                                id='name-input'
+                                value={name}
+                                required
+                                placeholder='Name'
+                                onChange={handleNameChange} />
                         </div>
                         <div className='input-error'>
                             {nameError}
@@ -134,40 +144,34 @@ const AddMovie = () => {
                     </div>
                     <div>
                         <div>
-                        <input
-                            type='text'
-                            id='rating-input'
-                            value={rating}
-                            required
-                            placeholder={ratingInputHelperText}
-                            onChange={handleRatingChange} />
+                            <input
+                                type='text'
+                                id='rating-input'
+                                value={rating}
+                                required
+                                placeholder={ratingInputHelperText}
+                                onChange={handleRatingChange} />
                         </div>
                         <div className='input-error'>
                             {ratingError}
                         </div>
                     </div>
                     <div>
-                        <input list='genres'
-                            type='text'
-                            id='genre-input'
-                            value={genre}
-                            required
-                            placeholder='Genre'
-                            onChange={handleGenreChange} />
+                        <div>
+                            <input list='genres'
+                                type='text'
+                                id='genre-input'
+                                value={genre}
+                                required
+                                placeholder='Genre'
+                                onChange={handleGenreChange} />
                             <datalist id='genres'>
-                                <option value='superhero' />
-                                <option value='sci-fi' />
-                                <option value='comedy' />
-                                <option value='romcom' />
-                                <option value='romance' />
-                                <option value='action' />
-                                <option value='thriller' />
-                                <option value='mystery' />
-                                <option value='crime' />
-                                <option value='fantasy' />
-                                <option value='drama' />
-                                <option value='horror' />
+                                {genres.map(genre => <option value={genre} />)}
                             </datalist>
+                        </div>
+                        <div className='input-error'>
+                            {genreError}
+                        </div>
                     </div>
                     <div style={styles.buttonContainer}>
                         <input type='submit' value='Add' className='button' style={styles.addButton} />
