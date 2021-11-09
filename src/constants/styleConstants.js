@@ -1,7 +1,8 @@
 const styleConstants = {
     color: {
-        tableRowDark: '#9AFF8A',
-        tableRowLight: '#E4FFDB'
+        primaryBlue: '#04a6d8',
+        tableRowDark: '#87CEEB',
+        tableRowLight: '#EFEFFF'
     }
 }
 

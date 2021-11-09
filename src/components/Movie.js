@@ -6,7 +6,7 @@ const Movie = ({ movie, serialNo }) => {
         styleConstants.color.tableRowDark;
 
     const color = serialNo % 2 === 0 ?
-        '004F11' : 'white';
+        '#0088B2' : '#FFFFFF';
     return (
         <tr style={{ 'backgroundColor': rowColor, filter: 'brightness(100%)', 'color': color}}>
             <td className='serialNo'>{serialNo}</td>

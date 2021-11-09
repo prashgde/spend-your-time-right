@@ -1,6 +1,7 @@
+import styleConstants from "../constants/styleConstants";
+
 const SortButton = ({id, active, handleSort}) => {
-    const selectedColor = '#00960F';
-    const color = active ? selectedColor : 'white';
+    const color = active ?  styleConstants.color.primaryBlue: 'white';
     const name = id.includes('asc') ? 'up-arrow' : 'down-arrow';
 
     const handleClick = id => {
