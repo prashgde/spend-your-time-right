@@ -30,7 +30,7 @@ const MoviesHeader = () => {
                         id='imdb'
                         name='imdb'
                         checked={imdbChecked}
-                        onChange={handleImdbChecked}
+                        readOnly
                     />
                 </div>
                 <label htmlFor='imdb'>{imdbSwitchText}</label>
@@ -175,8 +175,8 @@ const Movies = ({ searchString }) => {
                 <thead>
                     <tr>
                         <th className='serialNo'>No.</th>
-                        {titles.map(title =>
-                            <th className='table-info-column'>
+                        {titles.map((title, index) =>
+                            <th key={index} className='table-info-column'>
                                 <TableHeader title={title} sortConfig={sortConfig} handleSort={handleSort} />
                             </th>
                         )}
@@ -184,7 +184,7 @@ const Movies = ({ searchString }) => {
                 </thead>
                 <tbody>
                     {searchedMovies.map((movie, index) =>
-                        <Movie movie={movie} serialNo={index + 1} />
+                        <Movie key={index} movie={movie} serialNo={index + 1} />
                     )}
                 </tbody>
             </table>

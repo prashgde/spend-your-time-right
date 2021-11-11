@@ -167,7 +167,7 @@ const AddMovie = () => {
                                 placeholder='Genre'
                                 onChange={handleGenreChange} />
                             <datalist id='genres'>
-                                {genres.map(genre => <option value={genre} />)}
+                                {genres.map((genre, index) => <option key={index} value={genre} />)}
                             </datalist>
                         </div>
                         <div className='input-error'>
