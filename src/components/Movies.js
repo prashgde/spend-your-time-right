@@ -6,22 +6,101 @@ import TableHeader from "./TableHeader";
 
 const titles = ['Name', 'Year', 'Rating', 'Genre'];
 
+const MoviesHeader = () => {
+    const { imdbCheckedValue } = useContext(MovieContext);
+    const [imdbChecked, setImdbChecked] = imdbCheckedValue;
+
+    const switchStyle = imdbChecked ?
+        { 'backgroundColor': 'lightblue', 'transition': '.5s' } :
+        { 'backgroundColor': 'lightgreen', 'transition': '.5s' };
+    
+    const imdbSwitchText = imdbChecked ? `Switch to Prasanna's top 100` : `Switch to imdb top 100`;
+
+    const handleImdbChecked = () => {
+        setImdbChecked(prevImdbChecked => !prevImdbChecked);
+    }
+    
+    return (
+        <div>
+            <h3>Movies</h3>
+            <div className='switch-container'>
+                <div className='switch' style={switchStyle} onClick={() => handleImdbChecked()}>
+                    <input
+                        type='checkbox'
+                        id='imdb'
+                        name='imdb'
+                        checked={imdbChecked}
+                        onChange={handleImdbChecked}
+                    />
+                </div>
+                <label htmlFor='imdb'>{imdbSwitchText}</label>
+            </div>
+        </div>
+    );
+}
+
 const Movies = ({ searchString }) => {
     const { movieValue, imdbCheckedValue } = useContext(MovieContext);
-    const [imdbChecked, setImdbChecked] = imdbCheckedValue;
+    const [imdbChecked] = imdbCheckedValue;
     const [movies] = movieValue;
 
     const [searchedMovies, setSearchedMovies] = useState(movies);
-
+    
     const [sortConfig, setSortConfig] = useState({
         key: 'rating',
         order: 'des'
     });
 
     useEffect(() => {
-        //console.log('Toggled:' + imdbChecked);
         const selectedMovies = imdbChecked ?
             [{
+                name: 'The Shawshank Redemption',
+                year: 1994,
+                rating: 9.3,
+                genre: 'drama'
+            },
+            {
+                name: 'The Godfather',
+                year: 1972,
+                rating: 9.2,
+                genre: 'crime, drama'
+            },
+            {
+                name: 'The Dark Knight',
+                year: 2008,
+                rating: 9.0,
+                genre: 'action, crime, drama'
+            },
+            {
+                name: 'The Godfather: Part II',
+                year: 1974,
+                rating: 9.0,
+                genre: 'crime, drama'
+            },
+            {
+                name: 'The Shawshank Redemption',
+                year: 1994,
+                rating: 9.3,
+                genre: 'drama'
+            },
+            {
+                name: 'The Godfather',
+                year: 1972,
+                rating: 9.2,
+                genre: 'crime, drama'
+            },
+            {
+                name: 'The Dark Knight',
+                year: 2008,
+                rating: 9.0,
+                genre: 'action, crime, drama'
+            },
+            {
+                name: 'The Godfather: Part II',
+                year: 1974,
+                rating: 9.0,
+                genre: 'crime, drama'
+            }, {
                 name: 'The Shawshank Redemption',
                 year: 1994,
                 rating: 9.3,
@@ -73,10 +152,6 @@ const Movies = ({ searchString }) => {
         }
     }, [imdbChecked, searchString, movies, sortConfig]);
 
-    const handleImdbChecked = e => {
-        setImdbChecked(prevImdbChecked => !prevImdbChecked);
-    }
-
     const handleSort = (sortButtonId) => {
         const order = sortButtonId.toLowerCase().includes('asc') ? 'asc' : 'des';
         let key;
@@ -93,8 +168,6 @@ const Movies = ({ searchString }) => {
         setSortConfig(previousSortConfig => ({ ...previousSortConfig, key, order }));
         //setSortConfig({ key, order });
     }
-
-    const imdbSwitchText = imdbChecked ? `Switch to Prasanna's top 100` : `Switch to imdb top 100`;
 
     const searchResults =
         searchedMovies.length === 0 ? <h4>No Movies Found</h4> :
@@ -118,18 +191,10 @@ const Movies = ({ searchString }) => {
 
     return (
         <div className='movies'>
-            <h3>Movies</h3>
-            <div className='switch'>
-                <input
-                    type='checkbox'
-                    id='imdb' 
-                    name='imdb'
-                    checked={imdbChecked}
-                    onChange={handleImdbChecked}
-                />
-                <label for='imdb'>{imdbSwitchText}</label>
+            <MoviesHeader/>
+            <div>
+                {searchResults}
             </div>
-            {searchResults}
         </div>
     );
 }

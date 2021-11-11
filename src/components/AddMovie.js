@@ -17,7 +17,8 @@ const styles = {
 let movieId = 4;
 
 const AddMovie = () => {
-    const { movieValue } = useContext(MovieContext);
+    const { movieValue, imdbCheckedValue } = useContext(MovieContext);
+    const [imdbChecked] = imdbCheckedValue;
     const [movies, setMovies] = movieValue;
 
     const [name, setName] = useState('');
@@ -111,8 +112,8 @@ const AddMovie = () => {
 
     return (
         <div className='add-movie-container'>
-            <h3>Add a Movie</h3>
-            <form onSubmit={handleSubmit} className='add-movie-form'>
+            {!imdbChecked && <h3>Add a Movie</h3>}
+            { !imdbChecked && <form onSubmit={handleSubmit} className='add-movie-form'>
                 <div className='add-movie'>
                     <div>
                         <div>
@@ -178,7 +179,7 @@ const AddMovie = () => {
                         <input type='reset' value='Reset' className='button' style={styles.resetButton} onClick={handleReset} />
                     </div>
                 </div>
-            </form>
+            </form>}
         </div>
     );
 }
