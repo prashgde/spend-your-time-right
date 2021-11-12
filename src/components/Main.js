@@ -10,14 +10,13 @@ const Main = () => {
     const [searchString, setSearchString] = useState('');
 
     const handleSearchStringChange = searchStr => {
-        console.log(searchStr)
         setSearchString(searchStr);
     }
 
     return (
         <Router>
             <div className='nav-container'>
-                <div style={{ 'display': 'flex', 'align-items': 'center', 'gap': '30px' }}>
+                <div style={{ 'display': 'flex', 'alignItems': 'center', 'gap': '30px' }}>
                     <Link id='homeLink' className='link' to='/'>Your Next Movies</Link>
                     <SearchBar
                         searchString={searchString}

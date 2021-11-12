@@ -6,16 +6,67 @@ import TableHeader from "./TableHeader";
 
 const titles = ['Name', 'Year', 'Rating', 'Genre'];
 
+const MoviesHeader = () => {
+    const { imdbCheckedValue } = useContext(MovieContext);
+    const [imdbChecked, setImdbChecked] = imdbCheckedValue;
+
+    const switchStyle = imdbChecked ?
+        { 'backgroundColor': 'lightblue', 'transition': '.5s' } :
+        { 'backgroundColor': 'lightgreen', 'transition': '.5s' };
+    
+    const imdbSwitchText = imdbChecked ? `Switch to Prasanna's top 100` : `Switch to imdb top 100 voted`;
+
+    const handleImdbChecked = () => {
+        setImdbChecked(prevImdbChecked => !prevImdbChecked);
+    }
+    
+    return (
+        <div>
+            <h3>Movies</h3>
+            <div className='switch-container'>
+                <div className='switch' style={switchStyle} onClick={() => handleImdbChecked()}>
+                    <input
+                        type='checkbox'
+                        id='imdb'
+                        name='imdb'
+                        checked={imdbChecked}
+                        readOnly
+                    />
+                </div>
+                <label htmlFor='imdb'>{imdbSwitchText}</label>
+            </div>
+        </div>
+    );
+}
+
 const Movies = ({ searchString }) => {
-    const [movies] = useContext(MovieContext);
-    const [searchedMovies, setSearchedMovies] = useState(movies);
-
-    let serialNo = 1;
-
+    const { movieValue, imdbCheckedValue } = useContext(MovieContext);
+    const [imdbChecked] = imdbCheckedValue;
+    const [movies] = movieValue;
+    const [selectedMovies, setSelectedMovies] = useState(movies);
+    const [searchedMovies, setSearchedMovies] = useState(selectedMovies);
+    
     const [sortConfig, setSortConfig] = useState({
         key: 'rating',
         order: 'des'
     });
+
+    useEffect(() => {
+        (async () => {
+            if(imdbChecked) {
+                try {
+                    const url = 'http://localhost:3001/api/top100';
+                    const response = await fetch(url);
+                    const top100 = await response.json();
+                    setSelectedMovies(top100);
+                } catch(err) {
+                    setSelectedMovies([])
+                }
+            } else {
+                setSelectedMovies([...movies])
+            }
+        })();
+    }, [imdbChecked, movies]);
 
     useEffect(() => {
         const compareMovies = (movie1, movie2) => {
@@ -35,15 +86,14 @@ const Movies = ({ searchString }) => {
         }
 
         if (searchString) {
-            setSearchedMovies(movies.filter(movie =>
+            setSearchedMovies(selectedMovies.filter(movie =>
                 movie.name.toLowerCase().includes(searchString.trim().toLowerCase()))
                 .sort((movie1, movie2) => compareMovies(movie1, movie2))
             );
         } else {
-            setSearchedMovies([...movies].sort((movie1, movie2) => compareMovies(movie1, movie2)));
+            setSearchedMovies([...selectedMovies].sort((movie1, movie2) => compareMovies(movie1, movie2)));
         }
-    }, [searchString, movies, sortConfig])
-
+    }, [imdbChecked, searchString, movies, sortConfig, selectedMovies]);
 
     const handleSort = (sortButtonId) => {
         const order = sortButtonId.toLowerCase().includes('asc') ? 'asc' : 'des';
@@ -63,29 +113,31 @@ const Movies = ({ searchString }) => {
     }
 
     const searchResults =
-        searchedMovies.length === 0 ? <h4>No Movies Found</h4> :
+        searchedMovies.length === 0 || selectedMovies.length === 0? <h4>No Movies Found</h4> :
             <table>
                 <thead>
                     <tr>
                         <th className='serialNo'>No.</th>
-                        {titles.map(title =>
-                            <th className='table-info-column'>
+                        {titles.map((title, index) =>
+                            <th key={index} className='table-info-column'>
                                 <TableHeader title={title} sortConfig={sortConfig} handleSort={handleSort} />
                             </th>
                         )}
                     </tr>
                 </thead>
                 <tbody>
-                    {searchedMovies.map(movie =>
-                        <Movie movie={movie} serialNo={serialNo++}/>
+                    {searchedMovies.map((movie, index) =>
+                        <Movie key={index} movie={movie} serialNo={index + 1} />
                     )}
                 </tbody>
             </table>
 
     return (
-        <div>
-            <h3>Movies</h3>
-            {searchResults}
+        <div className='movies'>
+            <MoviesHeader/>
+            <div>
+                {searchResults}
+            </div>
         </div>
     );
 }
