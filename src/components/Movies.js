@@ -91,7 +91,7 @@ const Movies = ({ searchString }) => {
                 .sort((movie1, movie2) => compareMovies(movie1, movie2))
             );
         } else {
-            setSearchedMovies(selectedMovies.sort((movie1, movie2) => compareMovies(movie1, movie2)));
+            setSearchedMovies([...selectedMovies].sort((movie1, movie2) => compareMovies(movie1, movie2)));
         }
     }, [imdbChecked, searchString, movies, sortConfig, selectedMovies]);
 
