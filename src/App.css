@@ -247,7 +247,7 @@ input:not(:checked)[type='checkbox'] {
 #search-input {
   margin-left: -28px;
   z-index: 2;
-  min-width: 300px;
+  min-width: 500px;
   padding-left: 28px;
 }
 

@@ -14,7 +14,7 @@ const MoviesHeader = () => {
         { 'backgroundColor': 'lightblue', 'transition': '.5s' } :
         { 'backgroundColor': 'lightgreen', 'transition': '.5s' };
     
-    const imdbSwitchText = imdbChecked ? `Switch to Prasanna's top 100` : `Switch to imdb top 100`;
+    const imdbSwitchText = imdbChecked ? `Switch to Prasanna's top 100` : `Switch to imdb top 100 voted`;
 
     const handleImdbChecked = () => {
         setImdbChecked(prevImdbChecked => !prevImdbChecked);
@@ -43,8 +43,8 @@ const Movies = ({ searchString }) => {
     const { movieValue, imdbCheckedValue } = useContext(MovieContext);
     const [imdbChecked] = imdbCheckedValue;
     const [movies] = movieValue;
-
-    const [searchedMovies, setSearchedMovies] = useState(movies);
+    const [selectedMovies, setSelectedMovies] = useState(movies);
+    const [searchedMovies, setSearchedMovies] = useState(selectedMovies);
     
     const [sortConfig, setSortConfig] = useState({
         key: 'rating',
@@ -52,80 +52,23 @@ const Movies = ({ searchString }) => {
     });
 
     useEffect(() => {
-        const selectedMovies = imdbChecked ?
-            [{
-                name: 'The Shawshank Redemption',
-                year: 1994,
-                rating: 9.3,
-                genre: 'drama'
-            },
-            {
-                name: 'The Godfather',
-                year: 1972,
-                rating: 9.2,
-                genre: 'crime, drama'
-            },
-            {
-                name: 'The Dark Knight',
-                year: 2008,
-                rating: 9.0,
-                genre: 'action, crime, drama'
-            },
-            {
-                name: 'The Godfather: Part II',
-                year: 1974,
-                rating: 9.0,
-                genre: 'crime, drama'
-            },
-            {
-                name: 'The Shawshank Redemption',
-                year: 1994,
-                rating: 9.3,
-                genre: 'drama'
-            },
-            {
-                name: 'The Godfather',
-                year: 1972,
-                rating: 9.2,
-                genre: 'crime, drama'
-            },
-            {
-                name: 'The Dark Knight',
-                year: 2008,
-                rating: 9.0,
-                genre: 'action, crime, drama'
-            },
-            {
-                name: 'The Godfather: Part II',
-                year: 1974,
-                rating: 9.0,
-                genre: 'crime, drama'
-            }, {
-                name: 'The Shawshank Redemption',
-                year: 1994,
-                rating: 9.3,
-                genre: 'drama'
-            },
-            {
-                name: 'The Godfather',
-                year: 1972,
-                rating: 9.2,
-                genre: 'crime, drama'
-            },
-            {
-                name: 'The Dark Knight',
-                year: 2008,
-                rating: 9.0,
-                genre: 'action, crime, drama'
-            },
-            {
-                name: 'The Godfather: Part II',
-                year: 1974,
-                rating: 9.0,
-                genre: 'crime, drama'
-            }] :
-            [...movies];
+        (async () => {
+            if(imdbChecked) {
+                try {
+                    const url = 'http://localhost:3001/api/top100';
+                    const response = await fetch(url);
+                    const top100 = await response.json();
+                    setSelectedMovies(top100);
+                } catch(err) {
+                    setSelectedMovies([])
+                }
+            } else {
+                setSelectedMovies([...movies])
+            }
+        })();
+    }, [imdbChecked, movies]);
 
+    useEffect(() => {
         const compareMovies = (movie1, movie2) => {
             switch (typeof movie1[sortConfig.key]) {
                 case 'number':
@@ -150,7 +93,7 @@ const Movies = ({ searchString }) => {
         } else {
             setSearchedMovies(selectedMovies.sort((movie1, movie2) => compareMovies(movie1, movie2)));
         }
-    }, [imdbChecked, searchString, movies, sortConfig]);
+    }, [imdbChecked, searchString, movies, sortConfig, selectedMovies]);
 
     const handleSort = (sortButtonId) => {
         const order = sortButtonId.toLowerCase().includes('asc') ? 'asc' : 'des';
@@ -170,7 +113,7 @@ const Movies = ({ searchString }) => {
     }
 
     const searchResults =
-        searchedMovies.length === 0 ? <h4>No Movies Found</h4> :
+        searchedMovies.length === 0 || selectedMovies.length === 0? <h4>No Movies Found</h4> :
             <table>
                 <thead>
                     <tr>
